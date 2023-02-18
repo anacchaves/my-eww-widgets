@@ -1,0 +1,34 @@
+(defpoll time :interval "10s"
+  "date '+%H:%M %b %d, %Y'")
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0"
+                      :y "-4px"
+                      :width "100%"
+                      :height "20px"
+                      :anchor "right top")
+  :reserve (struts :side "top" :distance "10px")
+  (sidestuff))
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (metric :label "ram"
+            :value {EWW_RAM.used_mem_perc}
+            :onchange "")
+    (metric :label "swap"
+            :value {EWW_RAM.total_swap/EWW_RAM.free_swap}
+            :onchange "")
+    time))
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
