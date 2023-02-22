@@ -2,7 +2,7 @@
   "date '+%H:%M %b %d, %Y'")
 
 (defwindow bar
-  :monitor 1
+  :monitor 0
   :windowtype "dock"
   :geometry (geometry :x "-5px" :y "-2px" :anchor "right bottom")
   :stacking "bg"
